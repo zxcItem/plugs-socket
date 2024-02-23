@@ -50,7 +50,7 @@ class InstallSocket extends Migrator
     }
 
     /**
-     * 插件-通信账号
+     * 插件-通信账户
      * @class SocketMaster
      * @table SocketMaster
      * @return void
@@ -66,7 +66,7 @@ class InstallSocket extends Migrator
 
         // 数据表
         $this->table($table, [
-            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '插件-通信记录',
+            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '插件-通信账户',
         ])
             ->addColumn('name', 'string', ['limit' => 20, 'default' => '', 'null' => true, 'comment' => '账户标题'])
             ->addColumn('code', 'string', ['limit' => 30, 'default' => '', 'null' => true, 'comment' => '账户标识'])
