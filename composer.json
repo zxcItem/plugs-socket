@@ -35,7 +35,7 @@
         },
         "plugin": {
             "init": {
-                "stc/worker.php": "!config/worker.php"
+                "stc/worker.php": "config/worker.php"
             }
         }
     },
