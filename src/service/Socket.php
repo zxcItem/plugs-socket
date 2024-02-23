@@ -2,6 +2,7 @@
 
 namespace plugin\socket\service;
 
+use Exception;
 use GatewayWorker\Lib\Gateway;
 use think\admin\Service;
 
@@ -29,7 +30,7 @@ class Socket extends Service
      * 有消息时触发该方法
      * @param int $clientid 发消息的client_id
      * @param mixed $message 消息
-     * @throws \Exception
+     * @throws Exception
      */
     public static function onMessage($clientid, $message)
     {
@@ -41,7 +42,7 @@ class Socket extends Service
      * 发送指定用户信息
      * @param int $uid 发消息的uid
      * @param mixed $message 消息
-     * @throws \Exception
+     * @throws Exception
      */
     public static function sendToUid($uid, $message)
     {
