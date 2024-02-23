@@ -1,7 +1,5 @@
 <?php
 
-use plugin\socket\service\Socket;
-
 return [
     // 服务监听地址
     'host'     => '127.0.0.1',
@@ -41,7 +39,7 @@ return [
             // 进程类型(Workerman|Gateway|Register|Business)
             'type' => 'Gateway',
             // 监听地址(<协议>://<地址>:<端口>)
-            'listen' => 'websocket://127.0.0.1:8686',
+            'listen' => 'websocket://127.0.0.1:8689',
             // 高级自定义服务类
             'classes' => '',
             // 套接字上下文选项
@@ -97,7 +95,7 @@ return [
                 // 注册服务地址，与 Register 进程对应
                 "registerAddress" => '127.0.0.1:1236',
                 // 业务处理类
-                "eventHandler" => Socket::class,
+                "eventHandler" => \plugin\socket\service\socket::class,
                 // 进程启动回调
                 "onWorkerStart" => function () {
                     echo "Business onWorkerStart" . PHP_EOL;

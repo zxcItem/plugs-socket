@@ -54,6 +54,18 @@ class Master extends Controller
     }
 
     /**
+     * 修改投票项目状态
+     * @auth true
+     */
+    public function state()
+    {
+        SocketMaster::mSave($this->_vali([
+            'status.in:0,1'  => '状态值范围异常！',
+            'status.require' => '状态值不能为空！',
+        ]));
+    }
+
+    /**
      * 表单数据处理
      * @param array $data
      */

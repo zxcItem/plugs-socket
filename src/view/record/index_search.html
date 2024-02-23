@@ -2,22 +2,9 @@
     <legend>条件搜索</legend>
     <form action="{:request()->url()}" autocomplete="off" class="layui-form layui-form-pane form-search" method="get" onsubmit="return false">
         <div class="layui-form-item layui-inline">
-            <label class="layui-form-label">项目列表</label>
-            <div class="layui-input-inline">
-                <select class="layui-select" name="code">
-                    <option value="">-- 全部 --</option>
-                    {foreach $projects as $k=>$v} {if isset($get.code) and $get.code eq $v.code}
-                    <option selected value="{$v.code}">{$v.title}</option>
-                    {else}
-                    <option value="{$v.code}">{$v.title}</option>
-                    {/if}{/foreach}
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item layui-inline">
-            <label class="layui-form-label">IP地址</label>
+            <label class="layui-form-label">账户标识</label>
             <label class="layui-input-inline">
-                <input class="layui-input" name="login_ip" placeholder="请输入IP地址" value="{$get.login_ip|default=''}">
+                <input class="layui-input" name="code" placeholder="请输入账户标识" value="{$get.code|default=''}">
             </label>
         </div>
         <div class="layui-form-item layui-inline">
