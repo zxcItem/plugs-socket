@@ -51,7 +51,7 @@ return [
                 // 进程数量
                 "count" => 4,
                 // 心跳发送时间，针对客户端
-                'pingInterval' => 10,
+                'pingInterval' => 60,
                 // 心跳容错次数，针对客户端
                 'pingNotResponseLimit' => 0,
                 // 心跳包内容，针对客户端

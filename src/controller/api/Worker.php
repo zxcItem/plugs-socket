@@ -19,12 +19,12 @@ class Worker extends Controller
     public function start()
     {
         if (AdminService::isSuper()) try {
-            $message = exec('xadmin:worker --custom gateway status');
+            $message = $this->app->console->call('xadmin:worker', ['-d'])->fetch();
             if (stripos($message, 'daemons started successfully for pid')) {
-                sysoplog('系统运维管理', '尝试启动任务监听服务');
-                $this->success('任务监听服务启动成功！');
+                sysoplog('通信服务管理', '尝试启动通信服务');
+                $this->success('通信服务启动成功！');
             } elseif (stripos($message, 'daemons already exist for pid')) {
-                $this->success('任务监听服务已经启动！');
+                $this->success('通信服务已经启动！');
             } else {
                 $this->error(nl2br($message));
             }
