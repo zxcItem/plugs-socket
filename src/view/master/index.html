@@ -1,8 +1,6 @@
 {extend name='table'}
 
 {block name="button"}
-<button data-load='{:url("api.worker/start")}' class='layui-btn layui-btn-sm layui-btn-primary'>{:lang('开启服务')}</button>
-<!--<button data-load='{:url("admin/api.queue/stop")}' class='layui-btn layui-btn-sm layui-btn-primary'>{:lang('关闭服务')}</button>-->
 <!--{if auth("add")}-->
 <button data-modal='{:url("add")}' class='layui-btn layui-btn-sm layui-btn-primary'>添加账户</button>
 <!--{/if}-->
@@ -25,7 +23,6 @@
     $(function () {
         let $table = $('#MasterTable').layTable({
             even: true, height: 'full',
-            sort: {field: 'id', type: 'desc'},
             cellExpandedMode: 'tips',
             cols: [[
                 {checkbox: true, fixed: true},

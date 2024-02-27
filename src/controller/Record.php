@@ -3,7 +3,9 @@
 namespace plugin\socket\controller;
 
 use plugin\socket\model\SocketRecord;
+use plugin\socket\service\Config;
 use think\admin\Controller;
+use think\admin\Exception;
 use think\admin\helper\QueryHelper;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\DbException;
@@ -30,7 +32,7 @@ class Record extends Controller
         SocketRecord::mQuery()->layTable(function () {
             $this->title = '通信记录管理';
         }, function (QueryHelper $query) {
-            $query->equal('code')->dateBetween('create_time');
+            $query->with('socketMaster')->equal('code')->dateBetween('create_time');
         });
     }
 
@@ -50,5 +52,22 @@ class Record extends Controller
     public function remove()
     {
         SocketRecord::mDelete();
+    }
+
+    /**
+     * 修改签到配置
+     * @auth true
+     * @return void
+     * @throws Exception|Exception
+     */
+    public function config()
+    {
+        if ($this->request->isGet()) {
+            $this->vo = Config::get();
+            $this->fetch('config');
+        } else {
+            Config::set($this->request->post());
+            $this->success('配置更新成功！');
+        }
     }
 }
