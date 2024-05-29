@@ -23,12 +23,12 @@ class Socket extends Service
      * 将 client_id 与 token 绑定
      * @param $client_id
      * @param $data
-     * @return void
+     * @return bool
      */
-    public static function onWebSocketConnect($client_id, $data)
+    public static function onWebSocketConnect($client_id, $data): ?bool
     {
-        Message::onConnect($client_id,$data['get']['token']);
-        Gateway::bindUid($client_id,$data['get']['token']);
+        if(empty($data['get']['token'])) return self::closeClient($client_id,'权限不足,请联系管理员!');
+        return Message::onConnect($client_id,$data['get']['token']);
     }
 
 
@@ -68,11 +68,11 @@ class Socket extends Service
      * 踢掉某个客户端，并以$message通知被踢掉客户端
      * @param string $client_id
      * @param string|null $message
-     * @return void
+     * @return bool|null
      */
-    public static function closeClient(string $client_id, string $message = null)
+    public static function closeClient(string $client_id, string $message = null): ?bool
     {
-        Gateway::closeClient($client_id,$message);
+        return Gateway::closeClient($client_id,$message);
     }
 
 

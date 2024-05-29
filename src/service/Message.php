@@ -4,6 +4,7 @@ namespace plugin\socket\service;
 
 
 use Exception;
+use GatewayWorker\Lib\Gateway;
 use plugin\socket\model\SocketMaster;
 use plugin\socket\model\SocketRecord;
 use think\admin\Service;
@@ -18,12 +19,13 @@ class Message extends Service
      * 判断用户权限
      * @param $client
      * @param $code
-     * @return void
+     * @return bool|null
      */
-    public static function onConnect($client,$code)
+    public static function onConnect($client,$code): ?bool
     {
         $master = SocketMaster::mk()->where('code',$code)->findOrEmpty();
-        if ($master->isEmpty()) Socket::closeClient($client,'权限不足,请联系管理员!');
+        if ($master->isEmpty()) return Socket::closeClient($client,'权限不足,请联系管理员!');
+        Gateway::bindUid($client,$code);
     }
 
     /**
