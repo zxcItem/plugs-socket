@@ -34,7 +34,7 @@ class Message extends Service
      */
     public static function sendMessage($data)
     {
-        Socket::sendToUid($data['code'],$data['message']);
+        Socket::sendToUid($data['code'],json_encode($data,JSON_UNESCAPED_UNICODE));
         SocketRecord::mk()->save([
             'code'    => $data['code'],
             'comment' => $data['message']
