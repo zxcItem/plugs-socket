@@ -14,6 +14,7 @@
         "ext-gd": "*",
         "ext-curl": "*",
         "ext-json": "*",
+        "workerman/gateway-worker": "^3.1",
         "zoujingli/think-install": "^1.0|@dev",
         "zoujingli/think-library": "^6.1|@dev",
         "zoujingli/think-plugs-worker": "^1.0"
