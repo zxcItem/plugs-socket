@@ -27,7 +27,9 @@
     "extra": {
         "config": {
             "type": "plugin",
-            "name": "通信服务"
+            "name": "通信服务",
+            "cover": "layui-icon layui-icon-log",
+            "description": "通信服务应用消息推送场景,设置推送账号配置,记录消息推送记录"
         },
         "think": {
             "services": [
