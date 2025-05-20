@@ -1,0 +1,49 @@
+{
+    "type": "think-admin-plugin",
+    "name": "xiaochao/plugs-socket",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "叶落无痕",
+            "email": "zxcaile@foxmail.com"
+        }
+    ],
+    "require": {
+        "php": ">7.3",
+        "workerman/gateway-worker": "^3.1",
+        "zoujingli/think-plugs-worker": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "plugin\\socket\\": "src"
+        }
+    },
+    "extra": {
+        "config": {
+            "type": "plugin",
+            "name": "通信服务",
+            "cover": "layui-icon layui-icon-log",
+            "description": "通信服务应用消息推送场景,设置推送账号配置,记录消息推送记录"
+        },
+        "think": {
+            "services": [
+                "plugin\\socket\\Service"
+            ]
+        },
+        "plugin": {
+            "init": {
+                "stc/worker.php": "config/worker.php"
+            },
+            "copy": {
+                "stc/database": "database/migrations"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "zoujingli/think-install": true
+        }
+    }
+}
