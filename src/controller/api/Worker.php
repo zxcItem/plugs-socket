@@ -43,7 +43,6 @@ class Worker extends Controller
 
     /**
      * 启动通信服务
-     * @login true
      */
     public function start()
     {
