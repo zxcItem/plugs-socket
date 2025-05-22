@@ -2,7 +2,7 @@
 
 namespace plugin\socket\controller;
 
-use plugin\socket\model\SocketRecord;
+use plugin\socket\model\PluginSocketRecord;
 use plugin\socket\service\Config;
 use think\admin\Controller;
 use think\admin\Exception;
@@ -29,10 +29,10 @@ class Record extends Controller
      */
     public function index()
     {
-        SocketRecord::mQuery()->layTable(function () {
+        PluginSocketRecord::mQuery()->layTable(function () {
             $this->title = '通信记录管理';
         }, function (QueryHelper $query) {
-            $query->with('socketMaster')->equal('code')->dateBetween('create_time');
+            $query->with('socketMaster')->equal('code')->dateBetween('create_at');
         });
     }
 
@@ -51,7 +51,7 @@ class Record extends Controller
      */
     public function remove()
     {
-        SocketRecord::mDelete();
+        PluginSocketRecord::mDelete();
     }
 
     /**

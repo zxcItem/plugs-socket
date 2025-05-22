@@ -30,8 +30,8 @@ class InstallSocket extends Migrator
     public function change()
     {
         $this->_create_menu();
-        $this->_create_socket_master();
-        $this->_create_socket_record();
+        $this->_create_plugin_socket_master();
+        $this->_create_plugin_socket_record();
     }
 
     /**
@@ -50,68 +50,47 @@ class InstallSocket extends Migrator
     }
 
     /**
-     * 插件-通信账户
-     * @class SocketMaster
-     * @table SocketMaster
+     * 通信账户
+     * @class PluginSocketMaster
+     * @table plugin_socket_master
      * @return void
      */
-    private function _create_socket_master()
+    private function _create_plugin_socket_master()
     {
-
-        // 当前数据表
-        $table = 'socket_master';
-
-        // 存在则跳过
-        if ($this->hasTable($table)) return;
-
-        // 数据表
-        $this->table($table, [
-            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '插件-通信账户',
-        ])
-            ->addColumn('name', 'string', ['limit' => 255, 'default' => '', 'null' => true, 'comment' => '账户标题'])
-            ->addColumn('code', 'string', ['limit' => 255, 'default' => '', 'null' => true, 'comment' => '账户标识'])
-            ->addColumn('status', 'integer', ['limit' => 1, 'default' => 1, 'null' => true, 'comment' => '账户状态'])
-            ->addColumn('create_time', 'datetime', ['default' => NULL, 'null' => true, 'comment' => '创建时间'])
-            ->addIndex('code', ['name' => 'idx_socket_master_code'])
-            ->addIndex('status', ['name' => 'idx_socket_master_status'])
-            ->addIndex('create_time', ['name' => 'idx_socket_master_create_time'])
-            ->create();
-
-        // 修改主键长度
-        $this->table($table)->changeColumn('id', 'integer', ['limit' => 11, 'identity' => true]);
+        // 创建数据表对象
+        $table = $this->table('plugin_socket_master', [
+            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '通信账户',
+        ]);
+        PhinxExtend::upgrade($table, [
+            ['name', 'string', ['limit' => 255,'default' => null, 'null' => true, 'comment' => '账户标题']],
+            ['code', 'string', ['limit' => 255,'default' => null, 'null' => true, 'comment' => '账户标识']],
+            ['status', 'integer', ['limit' => 1, 'default' => 0, 'null' => true, 'comment' => '状态']],
+            ['create_at', 'datetime', ['default' => NULL, 'null' => true, 'comment' => '创建时间']],
+        ], [
+            'code','create_at'
+        ], true);
     }
 
     /**
-     * 插件-通信记录
-     * @class SocketRecord
-     * @table SocketRecord
+     * 通信记录
+     * @class PluginSocketRecord
+     * @table plugin_socket_record
      * @return void
      */
-    private function _create_socket_record()
+    private function _create_plugin_socket_record()
     {
-
-        // 当前数据表
-        $table = 'socket_record';
-
-        // 存在则跳过
-        if ($this->hasTable($table)) return;
-
-        // 数据表
-        $this->table($table, [
-            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '插件-通信记录',
-        ])
-            ->addColumn('unid', 'biginteger', ['limit' => 20, 'default' => 0, 'null' => true, 'comment' => '账号编号'])
-            ->addColumn('funid', 'biginteger', ['limit' => 20, 'default' => 0, 'null' => true, 'comment' => '接收账号'])
-            ->addColumn('code', 'string', ['limit' => 255, 'default' => '', 'null' => true, 'comment' => '账号标识'])
-            ->addColumn('comment', 'string', ['limit' => 500, 'default' => '', 'null' => true, 'comment' => '消息内容'])
-            ->addColumn('create_time', 'datetime', ['default' => NULL, 'null' => true, 'comment' => '创建时间'])
-            ->addIndex('unid', ['name' => 'idx_socket_record_unid'])
-            ->addIndex('funid', ['name' => 'idx_socket_record_funid'])
-            ->addIndex('code', ['name' => 'idx_socket_record_code'])
-            ->addIndex('create_time', ['name' => 'idx_socket_record_create_time'])
-            ->create();
-
-        // 修改主键长度
-        $this->table($table)->changeColumn('id', 'integer', ['limit' => 11, 'identity' => true]);
+        // 创建数据表对象
+        $table = $this->table('plugin_socket_record', [
+            'engine' => 'InnoDB', 'collation' => 'utf8mb4_general_ci', 'comment' => '通信记录',
+        ]);
+        PhinxExtend::upgrade($table, [
+            ['unid', 'biginteger', ['limit' => 20,'default' => 0, 'null' => true, 'comment' => '账号编号']],
+            ['funid', 'biginteger', ['limit' => 20,'default' => 0, 'null' => true, 'comment' => '接收账号']],
+            ['code', 'string', ['limit' => 255,'default' => null, 'null' => true, 'comment' => '账户标识']],
+            ['comment', 'text', ['default' => null, 'null' => true, 'comment' => '消息内容']],
+            ['create_at', 'datetime', ['default' => NULL, 'null' => true, 'comment' => '创建时间']],
+        ], [
+            'unid','funid','code','create_at'
+        ], true);
     }
 }

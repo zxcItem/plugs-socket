@@ -23,7 +23,7 @@ class Service extends Plugin
      * 定义安装包名
      * @var string
      */
-    protected $package = 'xiaochao/plugs-socket00000000000000000---------';
+    protected $package = 'xiaochao/plugs-socket';
 
 
     /**

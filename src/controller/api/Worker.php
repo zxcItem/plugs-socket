@@ -47,7 +47,7 @@ class Worker extends Controller
      */
     public function start()
     {
-        if (AdminService::isSuper()) try {
+        try {
             $map = [['--custom','register','-d'], ['--custom','gateway','-d'], ['--custom','business','-d']];
             foreach ($map as $item) {
                 $message = $this->app->console->call('xadmin:worker', $item)->fetch();
@@ -66,8 +66,6 @@ class Worker extends Controller
         } catch (\Exception $exception) {
             trace_file($exception);
             $this->error($exception->getMessage());
-        } else {
-            $this->error('请使用超管账号操作！');
         }
     }
 

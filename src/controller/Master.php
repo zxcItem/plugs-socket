@@ -2,7 +2,7 @@
 
 namespace plugin\socket\controller;
 
-use plugin\socket\model\SocketMaster;
+use plugin\socket\model\PluginSocketMaster;
 use think\admin\Controller;
 use think\admin\extend\CodeExtend;
 use think\admin\helper\QueryHelper;
@@ -28,10 +28,10 @@ class Master extends Controller
      */
     public function index()
     {
-        SocketMaster::mQuery()->layTable(function () {
+        PluginSocketMaster::mQuery()->layTable(function () {
             $this->title = '通信账户管理';
         }, function (QueryHelper $query) {
-            $query->like('name,code')->dateBetween('create_time');
+            $query->like('name,code')->dateBetween('create_at');
         });
     }
 
@@ -41,7 +41,7 @@ class Master extends Controller
      */
     public function add()
     {
-        SocketMaster::mForm('form');
+        PluginSocketMaster::mForm('form');
     }
 
     /**
@@ -50,7 +50,7 @@ class Master extends Controller
      */
     public function edit()
     {
-        SocketMaster::mForm('form');
+        PluginSocketMaster::mForm('form');
     }
 
     /**
@@ -59,7 +59,7 @@ class Master extends Controller
      */
     public function state()
     {
-        SocketMaster::mSave($this->_vali([
+        PluginSocketMaster::mSave($this->_vali([
             'status.in:0,1'  => '状态值范围异常！',
             'status.require' => '状态值不能为空！',
         ]));
@@ -80,6 +80,6 @@ class Master extends Controller
      */
     public function remove()
     {
-        SocketMaster::mDelete();
+        PluginSocketMaster::mDelete();
     }
 }
