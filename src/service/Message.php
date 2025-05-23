@@ -5,8 +5,6 @@ namespace plugin\socket\service;
 
 use Exception;
 use GatewayWorker\Lib\Gateway;
-use plugin\socket\model\PluginSocketMaster;
-use plugin\socket\model\PluginSocketRecord;
 use think\admin\Service;
 
 /**
@@ -23,8 +21,7 @@ class Message extends Service
      */
     public static function onConnect($client,$code): ?bool
     {
-        $master = PluginSocketMaster::mk()->where('code',$code)->findOrEmpty();
-        if ($master->isEmpty()) return Socket::closeClient($client,'权限不足,请联系管理员!');
+        if ($code != env('PLUGS_SOCKET_CODE')) return Socket::closeClient($client,'权限不足,请联系管理员!');
         return Gateway::bindUid($client,$code);
     }
 
@@ -37,7 +34,6 @@ class Message extends Service
     public static function sendMessage($code,$data)
     {
         Socket::sendToUid($code,json_encode($data,JSON_UNESCAPED_UNICODE));
-        PluginSocketRecord::mk()->insert(['code'=>$code,'comment'=>json_encode($data,JSON_UNESCAPED_UNICODE)]);
     }
 
 }

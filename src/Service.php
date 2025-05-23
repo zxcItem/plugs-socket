@@ -28,20 +28,9 @@ class Service extends Plugin
 
     /**
      * 菜单配置
-     * @return array[]
      */
-    public static function menu(): array
+    public static function menu()
     {
-        // 设置插件菜单
-        $code = app(static::class)->appCode;
-        return [
-            [
-                'name' => '通信记录',
-                'subs' => [
-                    ['name' => '通信账户管理', 'icon' => 'layui-icon layui-icon-chart', 'node' => "{$code}/master/index"],
-                    ['name' => '通信记录管理', 'icon' => 'layui-icon layui-icon-chart', 'node' => "{$code}/record/index"],
-                ],
-            ],
-        ];
+
     }
 }

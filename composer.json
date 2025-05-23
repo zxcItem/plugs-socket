@@ -33,9 +33,6 @@
         "plugin": {
             "init": {
                 "stc/worker.php": "config/worker.php"
-            },
-            "copy": {
-                "stc/database": "database/migrations"
             }
         }
     },
