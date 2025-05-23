@@ -26,11 +26,8 @@ class Service extends Plugin
     protected $package = 'xiaochao/plugs-socket';
 
 
-    /**
-     * 菜单配置
-     */
-    public static function menu()
+    public static function menu(): array
     {
-
+        return [];
     }
 }
