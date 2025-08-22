@@ -21,7 +21,6 @@ class Message extends Service
      */
     public static function onConnect($client,$code): ?bool
     {
-        if ($code != env('PLUGS_SOCKET_CODE')) return Socket::closeClient($client,'权限不足,请联系管理员!');
         return Gateway::bindUid($client,$code);
     }
 
